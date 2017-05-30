@@ -1,0 +1,33 @@
+language: c
+sudo: false
+
+addons:
+  apt:
+    sources: kalakris-cmake
+    packages:
+      - cmake
+      - libcunit1-dev
+
+env:
+  matrix:
+    - LUA=lua5.1
+    - LUA=lua5.2
+    - LUA=lua5.3
+    - LUA=luajit
+    - LUA=luajit2.1
+
+branches:
+  only: master
+
+before_install:
+  - source <(curl -s http://rocks.simbio.se/travis.sh 2> /dev/null)
+  - luarocks install busted
+  - luarocks install lua-cjson
+
+install: luarocks make
+
+script: busted
+
+notifications:
+  email: true
+  irc: "chat.freenode.net#simbiose"
