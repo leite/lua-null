@@ -22,7 +22,6 @@ branches:
 before_install:
   - source <(curl -s http://rocks.simbio.se/travis.sh 2> /dev/null)
   - luarocks install busted
-  - luarocks install lua-cjson
 
 install: luarocks make
 
